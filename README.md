@@ -121,7 +121,7 @@ natarajan-chidambaram   Human
 ```
 
 ```
-$ python BotHunter.py --key token --file-repo <file name containing repo names.txt>
+$ python BotHunter.py --key token --file-repo reponames.txt
          contributor     type
 natarajan-chidambaram   Human
                  bors     Bot
