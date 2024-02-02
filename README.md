@@ -80,25 +80,59 @@ To execute BotHunter, you need to provide a *GitHub personal access token* (API 
 
 > Example: $ python BotHunter.py --key token --repo repo_ownwer/repo_name
 
+`--file-repo <file cointaining mutiple REPO_OWNER/REPO_NAMEs>` A file containing the names of GitHub repositories (one name per line) to determine the type of all the contributors that are present in `https://github.com/repo_owner/repo_name/graphs/contributors' in all those repositories
+
+> Example: $ python BotHunter.py --key token --file-repo repo_ownwer/repo_name
+
 `--u <USERNAME>` The username for which the type needs to be determined
+
 > Example: $ python BotHunter.py --key token --u username
+
+`--file-u <File containg mutiple USERNAMEs>` A file containing usernames (one username per line) for which the type needs to be determined
+
+> Example: $ python BotHunter.py --key token --file-u username
+
+`--csv <file name to save the prediction.csv>` Filename to save the predictions
+
+> Example: $ python BotHunter.py --key token --file-u username --csv predictions.csv
 
 **Note**: Only either of `--repo` or `--u` can be given as input along with the `--key`.
 
 ### Examples
 ```
-$ python BotHunter.py --key token --u natarajan-chidambaram
-natarajan-chidambaram: Human
+$ python BotHunter.py --key token --u bors
+contributor   type
+       bors    Bot
 ```
 
 ```
-$ python BotHunter.py --key token --u bors
-bors: Bot
+$ python BotHunter.py --key token --file-u usernames.txt
+          contributor    type
+natarajan-chidambaram   Human
+                 bors     Bot
+           rust-timer     Bot
+
 ```
 
 ```
 $ python BotHunter.py --key token --repo natarajan-chidambaram/BotHunter
-natarajan-chidambaram: Human
+         contributor     type
+natarajan-chidambaram   Human
+```
+
+```
+$ python BotHunter.py --key token --file-repo <file name containing repo names.txt>
+         contributor     type
+natarajan-chidambaram   Human
+                 bors     Bot
+           rust-timer     Bot
+           dependabot     Bot
+         <anonymised>   Human
+         <anonymised>   Human
+```
+
+```
+$ python BotHunter.py --key token --file-u reponames.txt --csv predictions.csv
 ```
 
 ### License
