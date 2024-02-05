@@ -109,12 +109,12 @@ docker build -t bothunter .
 
 After building the image, you can run the Docker container using the following command:
 ```
-docker run -it bothunter --key <GH_TOKEN> <OTHER_ARGUMENTS>
+docker run --rm bothunter --key <GH_TOKEN> <OTHER_ARGUMENTS>
 ```
 
 To retrieve the output of the argument --csv, bind the current directory with the container working directory using the following command: 
 ```
-docker run -v `pwd`:`pwd` -it bothunter --key <GH_TOKEN>  <OTHER_ARGUMENTS> --csv <FILE_NAME>.csv 
+docker run --rm -v `pwd`:`pwd` bothunter --key <GH_TOKEN>  <OTHER_ARGUMENTS> --csv <FILE_NAME>.csv 
 ```
 
 # Examples
