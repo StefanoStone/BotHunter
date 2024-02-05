@@ -112,6 +112,11 @@ After building the image, you can run the Docker container using the following c
 docker run -it bothunter --key <GH_TOKEN> <OTHER_ARGUMENTS>
 ```
 
+To retrieve the output of the argument --csv, bind the current directory with the container working directory using the following command: 
+```
+docker run -v `pwd`:`pwd` -it bothunter --key <GH_TOKEN>  <OTHER_ARGUMENTS> --csv <FILE_NAME>.csv 
+```
+
 # Examples
 ```
 $ python BotHunter.py --key <GH_TOKEN> --u bors
