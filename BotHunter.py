@@ -86,7 +86,9 @@ def BotHunterTool(token, username=None, reponame=None):
     else:
         login_names = get_repo_users(reponame,gh)
 
-    for login_name in login_names:
+    print("Processing users for repo: " + reponame + " ..." if reponame else "Processing users...")
+
+    for login_name in tqdm(login_names):
         repo_subactivies = []
         pr_subactivities = []
         issue_subactivities = []
@@ -378,21 +380,22 @@ elif args.file_u:
     accounts_file = open(args.file_u,'r')
     accs_list = accounts_file.read()
     accounts.extend(accs_list.split('\n'))
-    # accounts.extend(['natty072','natarajan-chidambaram','tommens','pooya-rostami'])
 elif args.file_repo:
     repos_file = open(args.file_repo,'r')
     repos_list = repos_file.read()
     repos.extend(repos_list.split('\n'))
-    # repos.extend(['natarajan-chidambaram/RABBIT','wikimedia/wikidata-query-builder','tommens/BoDeGHa'])
+
+print("BotHunter Tool")
+print("This may take a while, please wait...\n")
 
 df = pd.DataFrame()
 predictions = []
 if len(accounts)>0:
-    for acc_name in tqdm(accounts):
+    for acc_name in accounts:
         predictions.extend(BotHunterTool(args.key, username=acc_name))
     
 elif len(repos)>0:
-    for repo_name in tqdm(repos):
+    for repo_name in repos:
         predictions.extend(BotHunterTool(args.key, reponame=repo_name))
 
 df = pd.DataFrame(predictions, columns=['contributor','type'])
