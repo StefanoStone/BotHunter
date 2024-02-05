@@ -78,35 +78,49 @@ To execute BotHunter, you need to provide a *GitHub personal access token* (API 
 
 `--repo <REPO_OWNER/REPO_NAME>` Name of the GitHub repository to determine the type of all the contributors that are present in `https://github.com/repo_owner/repo_name/graphs/contributors'
 
-> Example: $ python BotHunter.py --key token --repo repo_ownwer/repo_name
+> Example: $ python BotHunter.py --key <GH_TOKEN> --repo <REPO_OWNER/REPO_NAME>
 
 `--file-repo <file cointaining mutiple REPO_OWNER/REPO_NAMEs>` A file containing the names of GitHub repositories (one name per line) to determine the type of all the contributors that are present in `https://github.com/repo_owner/repo_name/graphs/contributors' in all those repositories
 
-> Example: $ python BotHunter.py --key token --file-repo repo_ownwer/repo_name
+> Example: $ python BotHunter.py --key <GH_TOKEN> --file-repo <REPO_OWNER/REPO_NAME>
 
 `--u <USERNAME>` The username for which the type needs to be determined
 
-> Example: $ python BotHunter.py --key token --u username
+> Example: $ python BotHunter.py --key <GH_TOKEN> --u <USERNAME>
 
 `--file-u <File containg mutiple USERNAMEs>` A file containing usernames (one username per line) for which the type needs to be determined
 
-> Example: $ python BotHunter.py --key token --file-u username
+> Example: $ python BotHunter.py --key <GH_TOKEN> --file-u <USERNAME>
 
 `--csv <file name to save the prediction.csv>` Filename to save the predictions
 
-> Example: $ python BotHunter.py --key token --file-u username --csv predictions.csv
+> Example: $ python BotHunter.py --key <GH_TOKEN> --file-u <USERNAME> --csv <FILE_NAME>.csv
 
 **Note**: Only either of `--repo` or `--u` can be given as input along with the `--key`.
 
-### Examples
+### Docker
+
+You can also run BotHunter using Docker. To do so, you need to have Docker installed on your system. You can follow the instructions [here](https://docs.docker.com/get-docker/) to install Docker.
+
+After installing Docker, you can build the Docker image using the following command:
 ```
-$ python BotHunter.py --key token --u bors
+docker build -t bothunter .
+```
+
+After building the image, you can run the Docker container using the following command:
+```
+docker run -it bothunter --key <GH_TOKEN> <OTHER_ARGUMENTS>
+```
+
+# Examples
+```
+$ python BotHunter.py --key <GH_TOKEN> --u bors
 contributor   type
        bors    Bot
 ```
 
 ```
-$ python BotHunter.py --key token --file-u usernames.txt
+$ python BotHunter.py --key <GH_TOKEN> --file-u usernames.txt
           contributor    type
 natarajan-chidambaram   Human
                  bors     Bot
@@ -115,13 +129,13 @@ natarajan-chidambaram   Human
 ```
 
 ```
-$ python BotHunter.py --key token --repo natarajan-chidambaram/BotHunter
+$ python BotHunter.py --key <GH_TOKEN> --repo natarajan-chidambaram/BotHunter
          contributor     type
 natarajan-chidambaram   Human
 ```
 
 ```
-$ python BotHunter.py --key token --file-repo reponames.txt
+$ python BotHunter.py --key <GH_TOKEN> --file-repo reponames.txt
          contributor     type
 natarajan-chidambaram   Human
                  bors     Bot
@@ -132,7 +146,7 @@ natarajan-chidambaram   Human
 ```
 
 ```
-$ python BotHunter.py --key token --file-u reponames.txt --csv predictions.csv
+$ python BotHunter.py --key <GH_TOKEN> --file-u reponames.txt --csv predictions.csv
 ```
 
 ### License
